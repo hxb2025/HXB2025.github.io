@@ -1,153 +1,226 @@
 <!DOCTYPE html>
-<html lang="en-CN">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shabby Server - The Purest MC Survival Home</title>
-    <!-- Import MC-style font and basic styles -->
+    <title>穷酸服务器 - 最纯粹的MC生存家园</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Noto+Sans+SC:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        /* Basic styles (adaptive for mobile and desktop) */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { 
-            font-family: 'Minecraft', 'Microsoft YaHei', sans-serif; 
-            background: #f5f5f0; 
-            color: #333; 
-            line-height: 1.8; 
-            padding: 20px; 
+            font-family: 'Press Start 2P', 'Noto Sans SC', sans-serif; 
+            background: #1a1a1a; 
+            color: #f0f0f0; 
+            line-height: 1.6; 
+            padding: 15px; 
+            background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAMAAAAp4XiDAAAAUVBMVEWFhYWDg4N3d3dtbW17e3t1dXWBgYGHh4d5eXlzc3OLi4ubm5uVlZWPj4+NjY19fX2JiYl/f39ra2uRkZGZmZlpaWmXl5dvb29xcXGTk5NnZ2c4zIwMAAAAG3RSTlMAf4CXRfJv3l4klf0eD2L78TwAIAAAAfSURBVEjH7cGBYQAAfAAAB8AB4xbi8AAAAASUVORK5CYII=");
+            background-size: 64px;
         }
-        /* MC-style title */
+        .container { 
+            max-width: 850px; 
+            margin: 25px auto; 
+            background: #2d2d2d; 
+            padding: 35px 25px; 
+            border-radius: 4px; 
+            border: 4px solid #555; 
+            box-shadow: 0 0 0 2px #333, 8px 8px 0 #111; 
+            position: relative;
+        }
         h1 { 
             text-align: center; 
-            color: #2c3e50; 
-            margin: 30px 0; 
-            text-shadow: 2px 2px 0 #ddd; 
-            font-size: 2.2rem; 
+            color: #f1c40f; 
+            margin: 20px 0 30px; 
+            font-size: 2rem; 
+            text-shadow: 4px 4px 0 #2c3e50, 8px 8px 0 rgba(0,0,0,0.3); 
+            letter-spacing: 2px;
+            animation: glow 2s infinite alternate;
         }
-        /* Card container (neat layout) */
-        .container { 
-            max-width: 800px; 
-            margin: 0 auto; 
-            background: white; 
-            padding: 30px; 
-            border-radius: 10px; 
-            box-shadow: 0 0 20px rgba(0,0,0,0.1); 
-        }
-        /* Slogan style */
         .slogan { 
             text-align: center; 
-            font-size: 1.1rem; 
-            margin: 20px 0; 
-            color: #444; 
+            font-size: 0.95rem; 
+            margin: 25px 0; 
+            line-height: 2; 
+            color: #e0e0e0;
         }
         .slogan strong { 
             color: #e74c3c; 
+            text-shadow: 2px 2px 0 #111; 
         }
-        /* Core info section */
         .info { 
-            margin: 30px 0; 
-            padding: 20px; 
+            margin: 35px 0; 
+            padding: 25px; 
             background: #f8f9fa; 
-            border-left: 4px solid #2ecc71; 
-            border-radius: 5px; 
+            color: #2d2d2d; 
+            border-radius: 2px; 
+            border: 3px solid #888; 
+            box-shadow: inset 0 0 0 2px #ddd;
         }
         .info p { 
-            margin: 10px 0; 
+            margin: 12px 0; 
             font-size: 1.05rem; 
+            display: flex; 
+            align-items: center;
         }
-        /* Version/IP/QQ Group style */
-        .contact { 
-            text-align: center; 
-            margin: 40px 0; 
-            padding: 20px; 
-            background: #2c3e50; 
-            color: white; 
-            border-radius: 8px; 
+        .info p:before { 
+            content: "■"; 
+            margin-right: 12px; 
+            color: #2ecc71; 
+            font-size: 1.2rem;
         }
-        .contact p { 
-            margin: 10px 0; 
-            font-size: 1.1rem; 
-        }
-        .contact a { 
-            color: #3498db; 
-            text-decoration: none; 
+        /* 高亮IP文本（替代原按钮，方便复制） */
+        .ip-text { 
+            color: #e74c3c; 
             font-weight: bold; 
-        }
-        .contact a:hover { 
-            color: #2980b9; 
             text-decoration: underline; 
+            cursor: text; /* 提示可复制 */
         }
-        /* Promise section */
         .promise { 
-            margin: 30px 0; 
+            margin: 35px 0; 
+            padding: 0 15px;
         }
         .promise h3 { 
-            color: #e67e22; 
-            margin-bottom: 15px; 
+            color: #3498db; 
+            margin-bottom: 20px; 
             text-align: center; 
+            font-size: 1.1rem; 
+            text-shadow: 2px 2px 0 #111;
         }
         .promise ul { 
             list-style: none; 
-            padding-left: 20px; 
         }
         .promise li { 
-            margin: 10px 0; 
-            padding-left: 25px; 
+            margin: 15px 0; 
+            padding-left: 30px; 
             position: relative; 
+            font-size: 0.9rem; 
+            color: #d0d0d0;
         }
         .promise li:before { 
             content: "✓"; 
             color: #2ecc71; 
             position: absolute; 
             left: 0; 
-            font-weight: bold; 
+            font-size: 1.2rem; 
+            text-shadow: 2px 2px 0 #111;
         }
-        /* Footer copyright */
+        /* 蓝色框改为QQ群跳转按钮 */
+        .contact { 
+            text-align: center; 
+            margin: 40px 0; 
+            padding: 25px; 
+            background: #2c3e50; 
+            border-radius: 2px; 
+            border: 3px solid #3498db; 
+            box-shadow: 0 0 0 2px #1a252f;
+        }
+        .contact p { 
+            margin: 12px 0; 
+            font-size: 0.95rem; 
+        }
+        .btn { 
+            display: inline-block; 
+            padding: 12px 20px; 
+            margin: 8px 0; 
+            background: #3498db; 
+            color: white; 
+            text-decoration: none; 
+            border-radius: 2px; 
+            border: 2px solid #2980b9; 
+            box-shadow: 3px 3px 0 #1a252f; 
+            transition: all 0.2s ease;
+        }
+        .btn:hover { 
+            background: #2980b9; 
+            transform: translate(-2px, -2px); 
+            box-shadow: 5px 5px 0 #1a252f; 
+            color: white;
+        }
+        .btn:active { 
+            transform: translate(1px, 1px); 
+            box-shadow: 2px 2px 0 #1a252f;
+        }
+        .afdian { 
+            margin: 40px 0 20px; 
+            text-align: center; 
+            padding: 20px; 
+            background: #2d2d2d; 
+            border: 3px solid #e74c3c; 
+            border-radius: 2px; 
+            box-shadow: 0 0 0 2px #1a1a1a;
+        }
+        .afdian h3 { 
+            color: #e74c3c; 
+            margin-bottom: 12px; 
+            font-size: 1rem; 
+            text-shadow: 2px 2px 0 #111;
+        }
         footer { 
             text-align: center; 
-            margin-top: 50px; 
+            margin-top: 40px; 
             color: #777; 
-            font-size: 0.9rem; 
+            font-size: 0.8rem; 
+            letter-spacing: 1px;
+        }
+        @keyframes glow {
+            from { text-shadow: 4px 4px 0 #2c3e50, 8px 8px 0 rgba(0,0,0,0.3); }
+            to { text-shadow: 4px 4px 0 #2c3e50, 8px 8px 0 rgba(0,0,0,0.3), 0 0 15px #f1c40f; }
+        }
+        @media (max-width: 600px) {
+            h1 { font-size: 1.6rem; }
+            .container { padding: 25px 15px; box-shadow: 0 0 0 2px #333, 5px 5px 0 #111; }
+            .info { padding: 20px 15px; }
+            .slogan { font-size: 0.85rem; }
+            .btn { padding: 10px 15px; font-size: 0.85rem; }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <!-- Title -->
-        <h1>Shabby Server</h1>
+        <h1>穷酸服务器</h1>
         
-        <!-- Slogan -->
         <div class="slogan">
-            We are <strong>"shabby"</strong> — no fancy plugins, just pure vanilla survival.<br>
-            But we are <strong>"rich"</strong> — with a warm, active player community.<br>
-            Here, you can relax as a casual player, or build grand projects with friends.<br>
-            Experience the true joy of MC and join a real "big family".
+            我们很<strong>“穷酸”</strong>，没有复杂的插件，只有最纯粹的原版生存。<br>
+            但我们很<strong>“富有”</strong>，拥有一个温暖、活跃的玩家社区。<br>
+            在这里，你可以安心当个养老玩家，也可以和伙伴们一起打造宏伟工程。<br>
+            感受最本真的MC乐趣，融入一个真正的“大家庭”。
         </div>
 
-        <!-- Core Info -->
+        <!-- 核心信息：IP改为纯文本（高亮方便复制） -->
         <div class="info">
-            <p>🎮 Server Version: 1.20.1</p>
-            <p>🌐 Server Address: play.simpfun.cn:36082</p>
-            <p>👋 QQ Group: 980943241</p>
+            <p>🎮 服务器版本：1.20.1</p>
+            <p>🌐 连接地址：<span class="ip-text">play.simpfun.cn:36082</span></p>
+            <p>👋 交流QQ群：980943241</p>
         </div>
 
-        <!-- Owner's Promise -->
         <div class="promise">
-            <h3>Our Commitment</h3>
+            <h3>我们的承诺</h3>
             <ul>
-                <li>The server owner will never abuse permissions; treat every player fairly.</li>
-                <li>The server will run stably long-term, protecting every creation you pour your heart into.</li>
+                <li>服主绝不滥用权限，公平公正对待每一位玩家</li>
+                <li>服务器长期稳定运行，守护你的每一个心血之作</li>
             </ul>
         </div>
 
-        <!-- Quick Join Prompt -->
+        <!-- 蓝色框：改为QQ群跳转按钮（点击直接打开QQ加群） -->
         <div class="contact">
-            <p>Copy IP to join → <a href="minecraft://connect?serverAddress=play.simpfun.cn:36082">play.simpfun.cn:36082</a></p>
-            <p>Scan the QR code or search for QQ Group: 980943241 to chat and team up!</p>
+            <p>点击直接加入QQ群 →</p>
+            <a href="https://qm.qq.com/cgi-bin/qm/qr?k=XXXXXXXXXXXX&jump_from=webapi" class="btn">QQ群：980943241</a>
+            <p>复制上方IP，在MC中直接连接服务器～</p>
+        </div>
+
+        <!-- 爱发电链接更新为：https://Hxb2025 -->
+        <div class="afdian">
+            <h3>支持我们 · 爱发电主页</h3>
+            <a href="https://ifdian.net/a/
+Hxb2025" target="_blank" class="btn" style="background: #e74c3c; border-color: #c0392b;">
+                访问爱发电 →
+            </a>
         </div>
     </div>
 
     <footer>
-        © Shabby Server - The Purest MC Survival Home | Hosted on GitHub Pages
+        © 穷酸服务器 - 最纯粹的MC生存家园 | 搭建于GitHub Pages
     </footer>
 </body>
 </html>
